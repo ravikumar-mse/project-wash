@@ -1,0 +1,8 @@
+mkdir project-wash
+cd project-wash
+git init
+git add .
+git commit -m "initial commit"
+git remote add origin https://github.com/ravikumar-mse/project-wash.git
+git push -u origin main
+
