@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project Wash</title>
+</head>
+<body>
+  <h2>Project Wash</h2>
+
+  {% if machine.status == 'free' %}
+      <p>Status: <strong>FREE</strong></p>
+
+      <form action="/start" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="room" placeholder="Room No." required>
+        <input type="text" name="phone" placeholder="Phone" required>
+        <button type="submit">Start Using</button>
+      </form>
+  {% else %}
+      <p>Status: <strong>IN USE</strong></p>
+      <p>Current: {{ machine.current_name }} (Room {{ machine.current_room }})</p>
+      <p>Phone: {{ machine.current_phone }}</p>
+
+      <form action="/finish" method="post">
+        <button type="submit">Finish (Done Washing)</button>
+      </form>
+
+      <hr>
+      <h4>Join Waitlist</h4>
+      <form action="/join" method="post">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="room" placeholder="Room No." required>
+        <input type="text" name="phone" placeholder="Phone" required>
+        <button type="submit">Join</button>
+      </form>
+
+      <h4>Waitlist</h4>
+      {% for w in waitlist %}
+         <p>{{ loop.index }}. {{ w.name }} (Room {{ w.room }})</p>
+      {% else %}
+         <p>No one waiting.</p>
+      {% endfor %}
+  {% endif %}
+</body>
+</html>
